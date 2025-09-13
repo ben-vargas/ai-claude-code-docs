@@ -31,6 +31,10 @@ print_doc_header() {
 
 # Function to auto-update docs if needed
 auto_update() {
+    # Honor explicit disable flag for maximum security (no network).
+    if [[ "${DISABLE_AUTO_UPDATE:-0}" == "1" ]]; then
+        return 0
+    fi
     cd "$DOCS_PATH" 2>/dev/null || return 1
     
     # Get current branch
