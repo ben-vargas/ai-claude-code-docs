@@ -12,6 +12,10 @@ SCRIPT_VERSION="0.3.3"
 DOCS_PATH="$HOME/.claude-code-docs"
 MANIFEST="$DOCS_PATH/docs/docs_manifest.json"
 
+# Allowlist for the Git remote used during auto-update. Defaults to your fork.
+# Override with ALLOWED_ORIGIN_REGEX if needed.
+ALLOWED_ORIGIN_REGEX="${ALLOWED_ORIGIN_REGEX:-^https://github.com/ben-vargas/ai-claude-code-docs(\\.git)?$}"
+
 # No colors since they don't work in terminal anyway
 
 # Enhanced sanitize function to prevent command injection
@@ -36,6 +40,17 @@ auto_update() {
         return 0
     fi
     cd "$DOCS_PATH" 2>/dev/null || return 1
+
+    # Security: only update if origin matches allowed regex (your fork by default)
+    local origin_url
+    origin_url=$(git remote get-url origin 2>/dev/null || echo "")
+    if [[ -z "$origin_url" ]]; then
+        return 2
+    fi
+    if [[ ! "$origin_url" =~ $ALLOWED_ORIGIN_REGEX ]]; then
+        echo "🔒 Skipping auto-update: origin '$origin_url' not in allowlist" >&2
+        return 0
+    fi
     
     # Get current branch
     local BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
