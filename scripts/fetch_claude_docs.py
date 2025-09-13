@@ -73,13 +73,13 @@ def save_manifest(docs_dir: Path, manifest: dict) -> None:
     manifest["last_updated"] = datetime.now().isoformat()
     
     # Get GitHub repository from environment or use default
-    github_repo = os.environ.get('GITHUB_REPOSITORY', 'ericbuess/claude-code-docs')
+    github_repo = os.environ.get('GITHUB_REPOSITORY', 'ben-vargas/ai-claude-code-docs')
     github_ref = os.environ.get('GITHUB_REF_NAME', 'main')
     
     # Validate repository name format (owner/repo)
     if not re.match(r'^[\w.-]+/[\w.-]+$', github_repo):
         logger.warning(f"Invalid repository format: {github_repo}, using default")
-        github_repo = 'ericbuess/claude-code-docs'
+        github_repo = 'ben-vargas/ai-claude-code-docs'
     
     # Validate branch/ref name
     if not re.match(r'^[\w.-]+$', github_ref):
@@ -374,11 +374,15 @@ def content_has_changed(content: str, old_hash: str) -> bool:
     return new_hash != old_hash
 
 
-def fetch_changelog(session: requests.Session) -> Tuple[str, str]:
+def fetch_changelog(session: requests.Session) -> Optional[Tuple[str, str]]:
     """
-    Fetch Claude Code changelog from GitHub repository.
-    Returns tuple of (filename, content).
+    Fetch Claude Code changelog from GitHub repository when explicitly allowed.
+    Returns tuple of (filename, content) or None when disabled.
     """
+    if os.environ.get('ALLOW_EXTERNAL_GITHUB_FETCH', '0') != '1':
+        logger.info("External GitHub fetch disabled by policy; skipping changelog fetch.")
+        return None
+
     changelog_url = "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md"
     filename = "changelog.md"
     
@@ -470,7 +474,7 @@ def main():
     logger.info("Starting Claude Code documentation fetch (improved version)")
     
     # Log configuration
-    github_repo = os.environ.get('GITHUB_REPOSITORY', 'ericbuess/claude-code-docs')
+    github_repo = os.environ.get('GITHUB_REPOSITORY', 'ben-vargas/ai-claude-code-docs')
     logger.info(f"GitHub repository: {github_repo}")
     
     # Create docs directory at repository root
@@ -571,32 +575,34 @@ def main():
     # Fetch Claude Code changelog
     logger.info("Fetching Claude Code changelog...")
     try:
-        filename, content = fetch_changelog(session)
-        
-        # Check if content has changed
-        old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
-        old_entry = manifest.get("files", {}).get(filename, {})
-        
-        if content_has_changed(content, old_hash):
-            content_hash = save_markdown_file(docs_dir, filename, content)
-            logger.info(f"Updated: {filename}")
-            last_updated = datetime.now().isoformat()
+        result = fetch_changelog(session)
+        if result is not None:
+            filename, content = result
+            # Check if content has changed
+            old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
+            old_entry = manifest.get("files", {}).get(filename, {})
+            
+            if content_has_changed(content, old_hash):
+                content_hash = save_markdown_file(docs_dir, filename, content)
+                logger.info(f"Updated: {filename}")
+                last_updated = datetime.now().isoformat()
+            else:
+                content_hash = old_hash
+                logger.info(f"Unchanged: {filename}")
+                last_updated = old_entry.get("last_updated", datetime.now().isoformat())
+            
+            new_manifest["files"][filename] = {
+                "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+                "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+                "hash": content_hash,
+                "last_updated": last_updated,
+                "source": "claude-code-repository"
+            }
+            
+            fetched_files.add(filename)
+            successful += 1
         else:
-            content_hash = old_hash
-            logger.info(f"Unchanged: {filename}")
-            last_updated = old_entry.get("last_updated", datetime.now().isoformat())
-        
-        new_manifest["files"][filename] = {
-            "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
-            "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-            "hash": content_hash,
-            "last_updated": last_updated,
-            "source": "claude-code-repository"
-        }
-        
-        fetched_files.add(filename)
-        successful += 1
-        
+            logger.info("Changelog fetch skipped.")
     except Exception as e:
         logger.error(f"Failed to fetch changelog: {e}")
         failed += 1

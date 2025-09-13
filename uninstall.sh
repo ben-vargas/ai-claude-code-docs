@@ -134,5 +134,5 @@ fi
 echo ""
 echo "✅ Uninstall complete!"
 echo ""
-echo "To reinstall:"
-echo "curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash"
+echo "To reinstall from your local fork checkout:"
+echo "bash /home/code/projects/ben-vargas/ai-claude-code-docs/main/install.sh"

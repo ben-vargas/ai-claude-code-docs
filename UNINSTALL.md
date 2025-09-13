@@ -76,7 +76,7 @@ After uninstalling, there should be no traces left except:
 
 ## Reinstalling
 
-To reinstall after uninstalling:
+To reinstall after uninstalling from your local fork checkout:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/install.sh | bash
+bash /home/code/projects/ben-vargas/ai-claude-code-docs/main/install.sh
 ```

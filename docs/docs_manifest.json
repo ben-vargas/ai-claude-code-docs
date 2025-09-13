@@ -309,8 +309,8 @@
     "fetch_tool_version": "3.0"
   },
   "last_updated": "2025-09-13T15:01:50.779046",
-  "base_url": "https://raw.githubusercontent.com/ericbuess/claude-code-docs/main/docs/",
-  "github_repository": "ericbuess/claude-code-docs",
+  "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
+  "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
   "description": "Claude Code documentation manifest. Keys are filenames, append to base_url for full URL."
 }
