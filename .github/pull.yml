@@ -1,9 +1,9 @@
 version: "1"
-# Pull app is intentionally disabled for this repository.
-# Empty rules array prevents any sync, PRs, or merges from upstream.
-rules: []
-
-# Optional labels kept for clarity in case the app reads config:
+# Valid no-op configuration for Pull app.
+# This rule compares main..main within the same repo and never produces changes.
+rules:
+  - base: main
+    upstream: main
+    mergeMethod: none
 label: ":no_entry: pull disabled"
 conflictLabel: "pull-disabled"
-
