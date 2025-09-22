@@ -201,8 +201,8 @@
     "sdk__sdk-sessions.md": {
       "original_url": "https://docs.claude.com/en/docs/claude-code/sdk/sdk-sessions",
       "original_md_url": "https://docs.claude.com/en/docs/claude-code/sdk/sdk-sessions.md",
-      "hash": "22f08be0fb8b14c6e70750eeccb2aae26697213faeff96518e04468c8c1acd73",
-      "last_updated": "2025-09-12T18:02:05.245456"
+      "hash": "2351ccebbba45d481cb08250638339847db6765155728a75959b45388be2e150",
+      "last_updated": "2025-09-22T18:09:56.067010"
     },
     "sdk__sdk-slash-commands.md": {
       "original_url": "https://docs.claude.com/en/docs/claude-code/sdk/sdk-slash-commands",
@@ -297,8 +297,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-09-22T15:06:32.502347",
-    "fetch_duration_seconds": 29.238578,
+    "last_fetch_completed": "2025-09-22T18:10:29.244976",
+    "fetch_duration_seconds": 184.902489,
     "total_pages_discovered": 48,
     "pages_fetched_successfully": 49,
     "pages_failed": 0,
@@ -308,7 +308,7 @@
     "total_files": 49,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-09-22T15:06:32.502378",
+  "last_updated": "2025-09-22T18:10:29.245002",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
