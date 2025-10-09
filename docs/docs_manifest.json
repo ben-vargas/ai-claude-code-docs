@@ -231,14 +231,14 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "65ebdcc1918efef3517d04b7ee7150cb6dde05aa6456382946078bcf364ffbf8",
-      "last_updated": "2025-10-08T21:05:34.580446",
+      "hash": "8a8792b4c717a26d73093534d0ca1e8237b5af54132f596c4d799d6c38efd0d0",
+      "last_updated": "2025-10-09T00:21:47.152934",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-10-08T21:05:34.580460",
-    "fetch_duration_seconds": 21.700882,
+    "last_fetch_completed": "2025-10-09T00:21:47.152953",
+    "fetch_duration_seconds": 21.419146,
     "total_pages_discovered": 38,
     "pages_fetched_successfully": 39,
     "pages_failed": 0,
@@ -248,7 +248,7 @@
     "total_files": 39,
     "fetch_tool_version": "3.0"
   },
-  "last_updated": "2025-10-08T21:05:34.580474",
+  "last_updated": "2025-10-09T00:21:47.152975",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
