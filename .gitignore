@@ -20,6 +20,11 @@ env/
 .DS_Store
 Thumbs.db
 
+# Node.js (not used by this project)
+node_modules/
+package.json
+package-lock.json
+
 # Project specific
 *.log
 .claude/settings.local.json
