@@ -374,7 +374,7 @@ FULL_ARGS="$*"
 # Check if arguments start with -t flag (before sanitization)
 if [[ "$FULL_ARGS" =~ ^-t([[:space:]]+(.*))?$ ]]; then
     show_freshness
-    remaining_args="${BASH_REMATCH[2]}"
+    remaining_args="${BASH_REMATCH[2]:-}"
     if [[ "$remaining_args" =~ ^what.?s?[[:space:]]?new.*$ ]]; then
         echo ""
         whats_new
@@ -385,7 +385,7 @@ if [[ "$FULL_ARGS" =~ ^-t([[:space:]]+(.*))?$ ]]; then
     exit 0
 elif [[ "$FULL_ARGS" =~ ^--check([[:space:]]+(.*))?$ ]]; then
     show_freshness
-    remaining_args="${BASH_REMATCH[2]}"
+    remaining_args="${BASH_REMATCH[2]:-}"
     if [[ "$remaining_args" =~ ^what.?s?[[:space:]]?new.*$ ]]; then
         echo ""
         whats_new
