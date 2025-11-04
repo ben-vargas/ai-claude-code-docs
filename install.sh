@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs Installer v0.3.3 - Changelog integration and compatibility improvements
+# Claude Code Docs Installer v0.4.0 - Agent SDK documentation support
 # This script installs/migrates claude-code-docs to ~/.claude-code-docs
 
-echo "Claude Code Docs Installer v0.3.3"
+echo "Claude Code Docs Installer v0.4.0"
 echo "==============================="
 
 # Fixed installation location
@@ -488,19 +488,21 @@ cleanup_old_installations
 
 # Success message
 echo ""
-echo "✅ Claude Code Docs v0.3.3 installed successfully!"
+echo "✅ Claude Code Docs v0.4.0 installed successfully!"
 echo ""
 echo "📚 Command: /docs (user)"
 echo "📂 Location: ~/.claude-code-docs"
 echo ""
 echo "Usage examples:"
-echo "  /docs hooks         # Read hooks documentation"
-echo "  /docs -t           # Check when docs were last updated"
-echo "  /docs what's new  # See recent documentation changes"
+echo "  /docs hooks                 # Read Claude Code hooks documentation"
+echo "  /docs agent-sdk__overview   # Read Agent SDK overview"
+echo "  /docs -t                    # Check when docs were last updated"
+echo "  /docs what's new           # See recent documentation changes"
 echo ""
 echo "🔄 Auto-updates: Enabled - syncs automatically when GitHub has newer content"
 echo ""
-echo "Available topics:"
-ls "$INSTALL_DIR/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 60
+echo "Documentation coverage:"
+echo "  📚 Claude Code: $(ls "$INSTALL_DIR/docs" | grep '\.md$' | grep -v '^agent-sdk__' | wc -l | tr -d ' ') files"
+echo "  🤖 Agent SDK: $(ls "$INSTALL_DIR/docs" | grep '\.md$' | grep '^agent-sdk__' | wc -l | tr -d ' ') files"
 echo ""
 echo "⚠️  Note: Restart Claude Code for auto-updates to take effect"

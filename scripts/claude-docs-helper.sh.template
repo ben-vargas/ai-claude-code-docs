@@ -1,12 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Documentation Helper Script v0.3.3
-# This script handles all /docs command functionality  
+# Claude Code Documentation Helper Script v0.4.0
+# This script handles all /docs command functionality
 # Installation path: ~/.claude-code-docs/claude-docs-helper.sh
 
 # Script version
-SCRIPT_VERSION="0.3.3"
+SCRIPT_VERSION="0.4.0"
 
 # Fixed installation path (no need for placeholder replacement)
 DOCS_PATH="$HOME/.claude-code-docs"
@@ -202,6 +202,11 @@ read_doc() {
         echo ""
         if [[ "$topic" == "changelog" ]]; then
             echo "📖 Official source: https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"
+        elif [[ "$topic" =~ ^agent-sdk__ ]]; then
+            # Extract the actual topic name after agent-sdk__
+            local sdk_topic="${topic#agent-sdk__}"
+            sdk_topic="${sdk_topic//__//}"  # Convert __ back to /
+            echo "📖 Official page: https://docs.anthropic.com/en/api/agent-sdk/$sdk_topic"
         else
             echo "📖 Official page: https://docs.anthropic.com/en/docs/claude-code/$topic"
         fi
@@ -240,13 +245,30 @@ read_doc() {
 # Function to list available documentation
 list_docs() {
     print_doc_header
-    
+
     # Auto-update to ensure fresh list
     auto_update
-    
-    echo "Available documentation topics:"
+
+    # Separate docs into two groups
+    local claude_code_docs=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep -v '^agent-sdk__' | sort)
+    local agent_sdk_docs=$(ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | grep '^agent-sdk__' | sort)
+
+    echo "📚 Claude Code Documentation:"
     echo ""
-    ls "$DOCS_PATH/docs" | grep '\.md$' | sed 's/\.md$//' | sort | column -c 80
+    if [[ -n "$claude_code_docs" ]]; then
+        echo "$claude_code_docs" | column -c 80
+    else
+        echo "  (none)"
+    fi
+    echo ""
+
+    echo "🤖 Agent SDK Documentation:"
+    echo ""
+    if [[ -n "$agent_sdk_docs" ]]; then
+        echo "$agent_sdk_docs" | column -c 80
+    else
+        echo "  (none)"
+    fi
     echo ""
     echo "Usage: /docs <topic> or /docs -t to check freshness"
 }
@@ -292,7 +314,17 @@ whats_new() {
         local changed_docs=$(git diff-tree --no-commit-id --name-only -r "$hash" -- docs/*.md 2>/dev/null | sed 's|docs/||' | sed 's|\.md$||' | head -5)
         if [[ -n "$changed_docs" ]]; then
             echo "$changed_docs" | while read -r doc; do
-                [[ -n "$doc" ]] && echo "  📄 $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
+                if [[ -n "$doc" ]]; then
+                    if [[ "$doc" =~ ^agent-sdk__ ]]; then
+                        # Agent SDK documentation
+                        local sdk_topic="${doc#agent-sdk__}"
+                        sdk_topic="${sdk_topic//__//}"  # Convert __ back to /
+                        echo "  📄 $doc: https://docs.anthropic.com/en/api/agent-sdk/$sdk_topic"
+                    else
+                        # Claude Code documentation
+                        echo "  📄 $doc: https://docs.anthropic.com/en/docs/claude-code/$doc"
+                    fi
+                fi
             done
         fi
         echo ""

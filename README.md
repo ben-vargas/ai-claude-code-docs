@@ -4,19 +4,19 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue)]()
 [![Beta](https://img.shields.io/badge/status-early%20beta-orange)](https://github.com/ben-vargas/ai-claude-code-docs/issues)
 
-Local mirror of Claude Code documentation files from https://docs.anthropic.com/en/docs/claude-code/, updated every 3 hours.
+Local mirror of Claude Code documentation from https://docs.anthropic.com/en/docs/claude-code/ and Agent SDK documentation from https://docs.anthropic.com/en/api/agent-sdk/, updated every 3 hours.
 
 ## ⚠️ Early Beta Notice
 
 **This is an early beta release**. There may be errors or unexpected behavior. If you encounter any issues, please [open an issue](https://github.com/ben-vargas/ai-claude-code-docs/issues) - your feedback helps improve the tool!
 
-## 🆕 Version 0.3.3 - Changelog Integration
+## 🆕 Version 0.4.0 - Agent SDK Documentation
 
 **New in this version:**
-- 📋 **Claude Code Changelog**: Access the official Claude Code release notes with `/docs changelog`
-- 🍎 **Full macOS compatibility**: Fixed shell compatibility issues for Mac users
-- 🐧 **Linux support**: Tested on Ubuntu, Debian, and other distributions
-- 🔧 **Improved installer**: Better handling of updates and edge cases
+- 🤖 **Agent SDK Documentation**: Full mirror of the Claude Agent SDK docs from `/en/api/agent-sdk/`
+- 📚 **Organized Sections**: Documentation grouped into "Claude Code" and "Agent SDK" sections
+- 🔗 **Correct Links**: Official page links automatically detect SDK vs Claude Code docs
+- 📦 **~60 Total Docs**: Now mirroring both Claude Code (43+ files) and Agent SDK (16+ files)
 
 To update locally:
 ```bash
@@ -26,6 +26,7 @@ bash install.sh
 ## Why This Exists
 
 - **Faster access** - Reads from local files instead of fetching from web
+- **Comprehensive coverage** - Mirrors both Claude Code CLI and Agent SDK documentation
 - **Automatic updates** - Attempts to stay current with the latest documentation
 - **Track changes** - See what changed in docs over time
 - **Claude Code changelog** - Quick access to official release notes and version history
@@ -66,9 +67,15 @@ The `/docs` command provides instant access to documentation with optional fresh
 
 ### Default: Lightning-fast access (no checks)
 ```bash
+# Claude Code documentation
 /docs hooks        # Instantly read hooks documentation
 /docs mcp          # Instantly read MCP documentation
 /docs memory       # Instantly read memory documentation
+
+# Agent SDK documentation
+/docs agent-sdk__overview    # Read Agent SDK overview
+/docs agent-sdk__typescript  # Read TypeScript SDK reference
+/docs agent-sdk__python      # Read Python SDK reference
 ```
 
 You'll see: `📚 Reading from local docs (run /docs -t to check freshness)`
@@ -179,14 +186,20 @@ See [UNINSTALL.md](UNINSTALL.md) for manual uninstall instructions.
 
 ## What's New
 
-### v0.3.3 (Latest)
+### v0.4.0 (Latest)
+- Added complete Agent SDK documentation mirror (~16 files)
+- Grouped display: Claude Code vs Agent SDK sections
+- Automatic URL detection for Agent SDK official links
+- Total documentation coverage: ~60 files
+
+### v0.3.3
 - Added Claude Code changelog integration (`/docs changelog`)
 - Fixed shell compatibility for macOS users (zsh/bash)
 - Improved documentation and error messages
 - Added platform compatibility badges
 
 ### v0.3.2
-- Fixed automatic update functionality  
+- Fixed automatic update functionality
 - Improved handling of local repository changes
 - Better error recovery during updates
 

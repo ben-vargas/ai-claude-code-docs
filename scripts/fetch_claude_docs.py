@@ -95,6 +95,28 @@ def save_manifest(docs_dir: Path, manifest: dict) -> None:
 
 def url_to_safe_filename(url_path: str) -> str:
     """Convert a URL path to a safe filename that preserves hierarchy only when needed."""
+
+    # Detect if this is an Agent SDK path and handle with namespace prefix
+    if '/api/agent-sdk/' in url_path:
+        # Extract path after agent-sdk/
+        if '/en/api/agent-sdk/' in url_path:
+            path = url_path.split('/en/api/agent-sdk/')[-1]
+        elif '/api/agent-sdk/' in url_path:
+            path = url_path.split('/api/agent-sdk/')[-1]
+        else:
+            path = url_path
+
+        # Prefix with agent-sdk__
+        if '/' in path:
+            safe_name = 'agent-sdk__' + path.replace('/', '__')
+        else:
+            safe_name = 'agent-sdk__' + path
+
+        if not safe_name.endswith('.md'):
+            safe_name += '.md'
+        return safe_name
+
+    # Existing Claude Code logic
     # Remove any known prefix patterns
     for prefix in ['/en/docs/claude-code/', '/docs/claude-code/', '/claude-code/']:
         if prefix in url_path:
@@ -106,11 +128,11 @@ def url_to_safe_filename(url_path: str) -> str:
             path = url_path.split('claude-code/')[-1]
         else:
             path = url_path
-    
+
     # If no subdirectories, just use the filename
     if '/' not in path:
         return path + '.md' if not path.endswith('.md') else path
-    
+
     # For subdirectories, replace slashes with double underscores
     # e.g., "advanced/setup" becomes "advanced__setup.md"
     safe_name = path.replace('/', '__')
@@ -215,6 +237,7 @@ def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> L
         # Only accept English documentation patterns
         english_patterns = [
             '/en/docs/claude-code/',
+            '/en/api/agent-sdk/',  # Agent SDK documentation
         ]
         
         for url in urls:
@@ -234,10 +257,13 @@ def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> L
                     '/tool-use/',  # Tool-specific pages
                     '/examples/',  # Example pages
                     '/legacy/',    # Legacy documentation
-                    '/api/',       # API reference pages
                     '/reference/', # Reference pages that aren't core docs
                 ]
-                
+
+                # Special handling for /api/ - skip all except agent-sdk
+                if '/api/' in path and '/api/agent-sdk/' not in path:
+                    continue
+
                 if not any(skip in path for skip in skip_patterns):
                     claude_code_pages.append(path)
         
