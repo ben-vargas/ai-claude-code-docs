@@ -264,8 +264,11 @@ def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[
         logger.warning("Agent SDK documentation will not be updated this run to preserve existing files")
 
     # If we got no pages at all, return fallback for Claude Code
+    # NOTE: Do NOT mark as successful when using fallback - we don't want to delete
+    # the other ~37 Claude Code docs that aren't in this minimal list
     if not claude_code_pages and not agent_sdk_pages:
-        logger.warning("No pages discovered from any source, using fallback lists")
+        logger.warning("No pages discovered from any source, using minimal fallback list")
+        logger.warning("Fallback fetch will NOT be treated as successful - existing files will be preserved")
         claude_code_pages = [
             ("/docs/en/overview", "https://code.claude.com"),
             ("/docs/en/setup", "https://code.claude.com"),
@@ -275,7 +278,7 @@ def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[
             ("/docs/en/mcp", "https://code.claude.com"),
             ("/docs/en/hooks", "https://code.claude.com"),
         ]
-        successful_sources.add("claude_code")
+        # DO NOT add to successful_sources - this is a fallback, not a successful fetch
 
     return claude_code_pages, agent_sdk_pages, successful_sources
 
@@ -608,10 +611,38 @@ def main():
             failed += 1
             failed_pages.append("changelog")
 
+    # Preserve manifest entries for files from failed sources
+    # This keeps the manifest in sync with the preserved files on disk
+    logger.info("Preserving manifest entries for files from failed sources...")
+    preserved_count = 0
+    for filename, file_info in manifest.get("files", {}).items():
+        # Skip files we already added to new_manifest
+        if filename in new_manifest["files"]:
+            continue
+
+        # Determine which source this file belongs to
+        if filename.startswith("agent-sdk__"):
+            file_source = "agent_sdk"
+        elif filename == "changelog.md":
+            file_source = "changelog"
+        else:
+            file_source = "claude_code"
+
+        # If this source was not successful, preserve the manifest entry
+        if file_source not in successful_sources:
+            new_manifest["files"][filename] = file_info
+            preserved_count += 1
+            logger.info(f"Preserved manifest entry for {filename} (source '{file_source}' was not fetched)")
+
+    if preserved_count > 0:
+        logger.info(f"Preserved {preserved_count} manifest entries from failed sources")
+
     # Clean up old files (only from sources that were successfully fetched)
     cleanup_old_files(docs_dir, fetched_files, manifest, successful_sources)
     
     # Add metadata to manifest
+    # NOTE: total_files reflects the final manifest state (fetched + preserved)
+    # not just what was fetched this run, so monitoring tools see the complete picture
     new_manifest["fetch_metadata"] = {
         "last_fetch_completed": datetime.now().isoformat(),
         "fetch_duration_seconds": (datetime.now() - start_time).total_seconds(),
@@ -624,7 +655,9 @@ def main():
         "successful_sources": sorted(list(successful_sources)),
         "claude_code_sitemap": CLAUDE_CODE_SITEMAP,
         "agent_sdk_sitemap": AGENT_SDK_SITEMAP,
-        "total_files": len(fetched_files),
+        "files_fetched_this_run": len(fetched_files),
+        "files_preserved_from_previous": preserved_count,
+        "total_files": len(new_manifest["files"]),
         "fetch_tool_version": "4.1"
     }
     
