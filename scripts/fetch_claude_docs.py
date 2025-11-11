@@ -181,18 +181,21 @@ def fetch_urls_from_sitemap(session: requests.Session, sitemap_url: str) -> List
         return []
 
 
-def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
+def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]], Set[str]]:
     """
     Discover all Claude Code and Agent SDK documentation pages from their respective sitemaps.
 
     Returns:
-        Tuple of (claude_code_pages, agent_sdk_pages)
-        Each page is a tuple of (path, base_url)
+        Tuple of (claude_code_pages, agent_sdk_pages, successful_sources)
+        - claude_code_pages: List of (path, base_url) tuples
+        - agent_sdk_pages: List of (path, base_url) tuples
+        - successful_sources: Set of source names that were successfully fetched
     """
     logger.info("Discovering documentation pages from sitemaps...")
 
     claude_code_pages = []
     agent_sdk_pages = []
+    successful_sources = set()
 
     # Discover Claude Code documentation
     try:
@@ -221,10 +224,15 @@ def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[
                     # Store path with base URL for code.claude.com
                     claude_code_pages.append((path, "https://code.claude.com"))
 
-        logger.info(f"Discovered {len(claude_code_pages)} Claude Code documentation pages")
+        if claude_code_pages:
+            successful_sources.add("claude_code")
+            logger.info(f"Discovered {len(claude_code_pages)} Claude Code documentation pages")
+        else:
+            logger.warning("No Claude Code pages discovered from sitemap")
 
     except Exception as e:
         logger.error(f"Failed to discover Claude Code pages: {e}")
+        logger.warning("Claude Code documentation will not be updated this run to preserve existing files")
 
     # Discover Agent SDK documentation
     try:
@@ -245,14 +253,19 @@ def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[
                 # Store path with base URL for docs.claude.com
                 agent_sdk_pages.append((path, "https://docs.claude.com"))
 
-        logger.info(f"Discovered {len(agent_sdk_pages)} Agent SDK documentation pages")
+        if agent_sdk_pages:
+            successful_sources.add("agent_sdk")
+            logger.info(f"Discovered {len(agent_sdk_pages)} Agent SDK documentation pages")
+        else:
+            logger.warning("No Agent SDK pages discovered from sitemap")
 
     except Exception as e:
         logger.error(f"Failed to discover Agent SDK pages: {e}")
+        logger.warning("Agent SDK documentation will not be updated this run to preserve existing files")
 
-    # If we got no pages, return fallback
+    # If we got no pages at all, return fallback for Claude Code
     if not claude_code_pages and not agent_sdk_pages:
-        logger.warning("No pages discovered, using fallback lists")
+        logger.warning("No pages discovered from any source, using fallback lists")
         claude_code_pages = [
             ("/docs/en/overview", "https://code.claude.com"),
             ("/docs/en/setup", "https://code.claude.com"),
@@ -262,8 +275,9 @@ def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[
             ("/docs/en/mcp", "https://code.claude.com"),
             ("/docs/en/hooks", "https://code.claude.com"),
         ]
+        successful_sources.add("claude_code")
 
-    return claude_code_pages, agent_sdk_pages
+    return claude_code_pages, agent_sdk_pages, successful_sources
 
 
 def validate_markdown_content(content: str, filename: str) -> None:
@@ -441,22 +455,43 @@ def save_markdown_file(docs_dir: Path, filename: str, content: str) -> str:
         raise
 
 
-def cleanup_old_files(docs_dir: Path, current_files: Set[str], manifest: dict) -> None:
+def cleanup_old_files(docs_dir: Path, current_files: Set[str], manifest: dict, successful_sources: Set[str]) -> None:
     """
     Remove only files that were previously fetched but no longer exist.
-    Preserves manually added files.
+    Only cleans up files from sources that were successfully fetched this run.
+    Preserves manually added files and files from failed sources.
+
+    Args:
+        docs_dir: Directory containing documentation files
+        current_files: Set of filenames that were successfully fetched this run
+        manifest: Previous manifest with file metadata
+        successful_sources: Set of source names that succeeded ('claude_code', 'agent_sdk', 'changelog')
     """
     previous_files = set(manifest.get("files", {}).keys())
     files_to_remove = previous_files - current_files
-    
+
     for filename in files_to_remove:
         if filename == MANIFEST_FILE:  # Never delete the manifest
             continue
-            
-        file_path = docs_dir / filename
-        if file_path.exists():
-            logger.info(f"Removing obsolete file: {filename}")
-            file_path.unlink()
+
+        # Determine which source this file belongs to
+        file_source = None
+        if filename.startswith("agent-sdk__"):
+            file_source = "agent_sdk"
+        elif filename == "changelog.md":
+            file_source = "changelog"
+        else:
+            # Assume it's a Claude Code doc
+            file_source = "claude_code"
+
+        # Only remove files from sources that were successfully fetched
+        if file_source in successful_sources:
+            file_path = docs_dir / filename
+            if file_path.exists():
+                logger.info(f"Removing obsolete file: {filename}")
+                file_path.unlink()
+        else:
+            logger.info(f"Preserving {filename} (source '{file_source}' was not successfully fetched this run)")
 
 
 def main():
@@ -486,7 +521,7 @@ def main():
     # Create a session for connection pooling
     with requests.Session() as session:
         # Discover documentation pages from both sources
-        claude_code_pages, agent_sdk_pages = discover_documentation_pages(session)
+        claude_code_pages, agent_sdk_pages, successful_sources = discover_documentation_pages(session)
 
         # Combine all pages
         all_pages = claude_code_pages + agent_sdk_pages
@@ -496,6 +531,7 @@ def main():
             sys.exit(1)
 
         logger.info(f"Total pages to fetch: {len(all_pages)} ({len(claude_code_pages)} Claude Code + {len(agent_sdk_pages)} Agent SDK)")
+        logger.info(f"Successfully discovered sources: {', '.join(sorted(successful_sources))}")
 
         # Fetch each discovered page
         for i, (page_path, base_url) in enumerate(all_pages, 1):
@@ -565,13 +601,15 @@ def main():
 
             fetched_files.add(filename)
             successful += 1
+            successful_sources.add("changelog")
         except Exception as e:
             logger.error(f"Failed to fetch changelog: {e}")
+            logger.warning("Changelog will not be updated this run to preserve existing file")
             failed += 1
             failed_pages.append("changelog")
-    
-    # Clean up old files (only those we previously fetched)
-    cleanup_old_files(docs_dir, fetched_files, manifest)
+
+    # Clean up old files (only from sources that were successfully fetched)
+    cleanup_old_files(docs_dir, fetched_files, manifest, successful_sources)
     
     # Add metadata to manifest
     new_manifest["fetch_metadata"] = {
@@ -583,10 +621,11 @@ def main():
         "pages_fetched_successfully": successful,
         "pages_failed": failed,
         "failed_pages": failed_pages,
+        "successful_sources": sorted(list(successful_sources)),
         "claude_code_sitemap": CLAUDE_CODE_SITEMAP,
         "agent_sdk_sitemap": AGENT_SDK_SITEMAP,
         "total_files": len(fetched_files),
-        "fetch_tool_version": "4.0"
+        "fetch_tool_version": "4.1"
     }
     
     # Save new manifest

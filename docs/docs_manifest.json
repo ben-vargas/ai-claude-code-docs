@@ -369,20 +369,25 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-10T18:45:45.653939",
-    "fetch_duration_seconds": 39.388654,
+    "last_fetch_completed": "2025-11-10T18:57:51.413825",
+    "fetch_duration_seconds": 33.470228,
     "total_pages_discovered": 60,
     "claude_code_pages": 44,
     "agent_sdk_pages": 16,
     "pages_fetched_successfully": 61,
     "pages_failed": 0,
     "failed_pages": [],
+    "successful_sources": [
+      "agent_sdk",
+      "changelog",
+      "claude_code"
+    ],
     "claude_code_sitemap": "https://code.claude.com/docs/sitemap.xml",
     "agent_sdk_sitemap": "https://docs.anthropic.com/sitemap.xml",
     "total_files": 61,
-    "fetch_tool_version": "4.0"
+    "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-10T18:45:45.653969",
+  "last_updated": "2025-11-10T18:57:51.413868",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
