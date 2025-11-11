@@ -93,7 +93,7 @@ claude
 You'll see the Claude Code welcome screen with your session information, recent conversations, and latest updates. Type `/help` for available commands or `/resume` to continue a previous conversation.
 
 <Tip>
-  After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](/en/docs/claude-code/iam#credential-management).
+  After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](/en/iam#credential-management).
 </Tip>
 
 ## Step 4: Ask your first question
@@ -252,7 +252,7 @@ Here are the most important commands for daily use:
 | `/help`             | Show available commands           | `> /help`                           |
 | `exit` or Ctrl+C    | Exit Claude Code                  | `> exit`                            |
 
-See the [CLI reference](/en/docs/claude-code/cli-reference) for a complete list of commands.
+See the [CLI reference](/en/cli-reference) for a complete list of commands.
 
 ## Pro tips for beginners
 
@@ -304,19 +304,19 @@ See the [CLI reference](/en/docs/claude-code/cli-reference) for a complete list 
 Now that you've learned the basics, explore more advanced features:
 
 <CardGroup cols={3}>
-  <Card title="Common workflows" icon="graduation-cap" href="/en/docs/claude-code/common-workflows">
+  <Card title="Common workflows" icon="graduation-cap" href="/en/common-workflows">
     Step-by-step guides for common tasks
   </Card>
 
-  <Card title="CLI reference" icon="terminal" href="/en/docs/claude-code/cli-reference">
+  <Card title="CLI reference" icon="terminal" href="/en/cli-reference">
     Master all commands and options
   </Card>
 
-  <Card title="Configuration" icon="gear" href="/en/docs/claude-code/settings">
+  <Card title="Configuration" icon="gear" href="/en/settings">
     Customize Claude Code for your workflow
   </Card>
 
-  <Card title="Claude Code on the web" icon="cloud" href="/en/docs/claude-code/claude-code-on-the-web">
+  <Card title="Claude Code on the web" icon="cloud" href="/en/claude-code-on-the-web">
     Run tasks asynchronously in the cloud
   </Card>
 </CardGroup>

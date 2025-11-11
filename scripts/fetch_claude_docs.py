@@ -26,16 +26,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Sitemap URLs to try (in order of preference)
-SITEMAP_URLS = [
-    "https://docs.anthropic.com/sitemap.xml",
-    "https://docs.anthropic.com/sitemap_index.xml",
-    "https://anthropic.com/sitemap.xml"
-]
-MANIFEST_FILE = "docs_manifest.json"
+# Sitemap URLs for different documentation sources
+CLAUDE_CODE_SITEMAP = "https://code.claude.com/docs/sitemap.xml"
+AGENT_SDK_SITEMAP = "https://docs.anthropic.com/sitemap.xml"
 
-# Base URL will be discovered from sitemap
-# No longer using global variable
+MANIFEST_FILE = "docs_manifest.json"
 
 # Headers to bypass caching and identify the script
 HEADERS = {
@@ -97,12 +92,14 @@ def url_to_safe_filename(url_path: str) -> str:
     """Convert a URL path to a safe filename that preserves hierarchy only when needed."""
 
     # Detect if this is an Agent SDK path and handle with namespace prefix
-    if '/api/agent-sdk/' in url_path:
+    if '/agent-sdk/' in url_path:
         # Extract path after agent-sdk/
-        if '/en/api/agent-sdk/' in url_path:
+        if '/en/docs/agent-sdk/' in url_path:
+            path = url_path.split('/en/docs/agent-sdk/')[-1]
+        elif '/en/api/agent-sdk/' in url_path:
             path = url_path.split('/en/api/agent-sdk/')[-1]
-        elif '/api/agent-sdk/' in url_path:
-            path = url_path.split('/api/agent-sdk/')[-1]
+        elif '/agent-sdk/' in url_path:
+            path = url_path.split('/agent-sdk/')[-1]
         else:
             path = url_path
 
@@ -116,18 +113,16 @@ def url_to_safe_filename(url_path: str) -> str:
             safe_name += '.md'
         return safe_name
 
-    # Existing Claude Code logic
-    # Remove any known prefix patterns
-    for prefix in ['/en/docs/claude-code/', '/docs/claude-code/', '/claude-code/']:
+    # Claude Code logic - handle new path structure
+    # New paths are like /docs/en/overview (from code.claude.com)
+    # Remove known prefix patterns
+    for prefix in ['/docs/en/', '/en/docs/claude-code/', '/docs/claude-code/', '/claude-code/']:
         if prefix in url_path:
             path = url_path.split(prefix)[-1]
             break
     else:
-        # If no known prefix, take everything after the last occurrence of 'claude-code/'
-        if 'claude-code/' in url_path:
-            path = url_path.split('claude-code/')[-1]
-        else:
-            path = url_path
+        # If no known prefix, use the last part
+        path = url_path.strip('/').split('/')[-1]
 
     # If no subdirectories, just use the filename
     if '/' not in path:
@@ -141,69 +136,19 @@ def url_to_safe_filename(url_path: str) -> str:
     return safe_name
 
 
-def discover_sitemap_and_base_url(session: requests.Session) -> Tuple[str, str]:
+def fetch_urls_from_sitemap(session: requests.Session, sitemap_url: str) -> List[str]:
     """
-    Discover the sitemap URL and extract the base URL from it.
-    
+    Fetch all URLs from a sitemap.
+
     Returns:
-        Tuple of (sitemap_url, base_url)
+        List of URLs from the sitemap
     """
-    for sitemap_url in SITEMAP_URLS:
-        try:
-            logger.info(f"Trying sitemap: {sitemap_url}")
-            response = session.get(sitemap_url, headers=HEADERS, timeout=30)
-            if response.status_code == 200:
-                # Extract base URL from the first URL in sitemap
-                # Parse XML safely to prevent XXE attacks
-                try:
-                    # Try with security parameters (Python 3.8+)
-                    parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
-                    root = ET.fromstring(response.content, parser=parser)
-                except TypeError:
-                    # Fallback for older Python versions
-                    logger.warning("XMLParser security parameters not available, using default parser")
-                    root = ET.fromstring(response.content)
-                
-                # Try with namespace first
-                namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-                first_url = None
-                for url_elem in root.findall('.//ns:url', namespace):
-                    loc_elem = url_elem.find('ns:loc', namespace)
-                    if loc_elem is not None and loc_elem.text:
-                        first_url = loc_elem.text
-                        break
-                
-                # If no URLs found, try without namespace
-                if not first_url:
-                    for loc_elem in root.findall('.//loc'):
-                        if loc_elem.text:
-                            first_url = loc_elem.text
-                            break
-                
-                if first_url:
-                    parsed = urlparse(first_url)
-                    base_url = f"{parsed.scheme}://{parsed.netloc}"
-                    logger.info(f"Found sitemap at {sitemap_url}, base URL: {base_url}")
-                    return sitemap_url, base_url
-        except Exception as e:
-            logger.warning(f"Failed to fetch {sitemap_url}: {e}")
-            continue
-    
-    raise Exception("Could not find a valid sitemap")
-
-
-def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> List[str]:
-    """
-    Dynamically discover all Claude Code documentation pages from the sitemap.
-    Now with better pattern matching flexibility.
-    """
-    logger.info("Discovering documentation pages from sitemap...")
-    
     try:
+        logger.info(f"Fetching sitemap: {sitemap_url}")
         response = session.get(sitemap_url, headers=HEADERS, timeout=30)
         response.raise_for_status()
-        
-        # Parse XML sitemap safely
+
+        # Parse XML safely to prevent XXE attacks
         try:
             # Try with security parameters (Python 3.8+)
             parser = ET.XMLParser(forbid_dtd=True, forbid_entities=True, forbid_external=True)
@@ -212,90 +157,113 @@ def discover_claude_code_pages(session: requests.Session, sitemap_url: str) -> L
             # Fallback for older Python versions
             logger.warning("XMLParser security parameters not available, using default parser")
             root = ET.fromstring(response.content)
-        
-        # Extract all URLs from sitemap
+
         urls = []
-        
+
         # Try with namespace first
         namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
         for url_elem in root.findall('.//ns:url', namespace):
             loc_elem = url_elem.find('ns:loc', namespace)
             if loc_elem is not None and loc_elem.text:
                 urls.append(loc_elem.text)
-        
+
         # If no URLs found, try without namespace
         if not urls:
             for loc_elem in root.findall('.//loc'):
                 if loc_elem.text:
                     urls.append(loc_elem.text)
-        
-        logger.info(f"Found {len(urls)} total URLs in sitemap")
-        
-        # Filter for ENGLISH Claude Code documentation pages only
-        claude_code_pages = []
-        
-        # Only accept English documentation patterns
-        english_patterns = [
-            '/en/docs/claude-code/',
-            '/en/api/agent-sdk/',  # Agent SDK documentation
-        ]
-        
+
+        logger.info(f"Found {len(urls)} URLs in sitemap")
+        return urls
+
+    except Exception as e:
+        logger.error(f"Failed to fetch sitemap {sitemap_url}: {e}")
+        return []
+
+
+def discover_documentation_pages(session: requests.Session) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
+    """
+    Discover all Claude Code and Agent SDK documentation pages from their respective sitemaps.
+
+    Returns:
+        Tuple of (claude_code_pages, agent_sdk_pages)
+        Each page is a tuple of (path, base_url)
+    """
+    logger.info("Discovering documentation pages from sitemaps...")
+
+    claude_code_pages = []
+    agent_sdk_pages = []
+
+    # Discover Claude Code documentation
+    try:
+        urls = fetch_urls_from_sitemap(session, CLAUDE_CODE_SITEMAP)
+
         for url in urls:
-            # Check if URL matches English pattern specifically
-            if any(pattern in url for pattern in english_patterns):
+            # Only accept English Claude Code documentation
+            if '/docs/en/' in url:
                 parsed = urlparse(url)
                 path = parsed.path
-                
-                # Remove any file extension
+
+                # Remove any file extension or trailing slash
                 if path.endswith('.html'):
                     path = path[:-5]
                 elif path.endswith('/'):
                     path = path[:-1]
-                
+
                 # Skip certain types of pages
                 skip_patterns = [
-                    '/tool-use/',  # Tool-specific pages
-                    '/examples/',  # Example pages
-                    '/legacy/',    # Legacy documentation
-                    '/reference/', # Reference pages that aren't core docs
+                    '/tool-use/',
+                    '/examples/',
+                    '/legacy/',
                 ]
 
-                # Special handling for /api/ - skip all except agent-sdk
-                if '/api/' in path and '/api/agent-sdk/' not in path:
-                    continue
-
                 if not any(skip in path for skip in skip_patterns):
-                    claude_code_pages.append(path)
-        
-        # Remove duplicates and sort
-        claude_code_pages = sorted(list(set(claude_code_pages)))
-        
+                    # Store path with base URL for code.claude.com
+                    claude_code_pages.append((path, "https://code.claude.com"))
+
         logger.info(f"Discovered {len(claude_code_pages)} Claude Code documentation pages")
-        
-        return claude_code_pages
-        
+
     except Exception as e:
-        logger.error(f"Failed to discover pages from sitemap: {e}")
-        logger.warning("Falling back to essential pages...")
-        
-        # More comprehensive fallback list
-        return [
-            "/en/docs/claude-code/overview",
-            "/en/docs/claude-code/setup",
-            "/en/docs/claude-code/quickstart",
-            "/en/docs/claude-code/memory",
-            "/en/docs/claude-code/common-workflows",
-            "/en/docs/claude-code/ide-integrations",
-            "/en/docs/claude-code/mcp",
-            "/en/docs/claude-code/github-actions",
-            "/en/docs/claude-code/sdk",
-            "/en/docs/claude-code/troubleshooting",
-            "/en/docs/claude-code/security",
-            "/en/docs/claude-code/settings",
-            "/en/docs/claude-code/hooks",
-            "/en/docs/claude-code/costs",
-            "/en/docs/claude-code/monitoring-usage",
+        logger.error(f"Failed to discover Claude Code pages: {e}")
+
+    # Discover Agent SDK documentation
+    try:
+        urls = fetch_urls_from_sitemap(session, AGENT_SDK_SITEMAP)
+
+        for url in urls:
+            # Only accept English Agent SDK documentation
+            if '/en/docs/agent-sdk/' in url:
+                parsed = urlparse(url)
+                path = parsed.path
+
+                # Remove any file extension or trailing slash
+                if path.endswith('.html'):
+                    path = path[:-5]
+                elif path.endswith('/'):
+                    path = path[:-1]
+
+                # Store path with base URL for docs.claude.com
+                agent_sdk_pages.append((path, "https://docs.claude.com"))
+
+        logger.info(f"Discovered {len(agent_sdk_pages)} Agent SDK documentation pages")
+
+    except Exception as e:
+        logger.error(f"Failed to discover Agent SDK pages: {e}")
+
+    # If we got no pages, return fallback
+    if not claude_code_pages and not agent_sdk_pages:
+        logger.warning("No pages discovered, using fallback lists")
+        claude_code_pages = [
+            ("/docs/en/overview", "https://code.claude.com"),
+            ("/docs/en/setup", "https://code.claude.com"),
+            ("/docs/en/quickstart", "https://code.claude.com"),
+            ("/docs/en/memory", "https://code.claude.com"),
+            ("/docs/en/common-workflows", "https://code.claude.com"),
+            ("/docs/en/mcp", "https://code.claude.com"),
+            ("/docs/en/hooks", "https://code.claude.com"),
         ]
+
+    return claude_code_pages, agent_sdk_pages
 
 
 def validate_markdown_content(content: str, filename: str) -> None:
@@ -514,50 +482,25 @@ def main():
     failed_pages = []
     fetched_files = set()
     new_manifest = {"files": {}}
-    
+
     # Create a session for connection pooling
-    sitemap_url = None
     with requests.Session() as session:
-        # Discover sitemap and base URL
-        try:
-            sitemap_url, base_url = discover_sitemap_and_base_url(session)
-        except Exception as e:
-            logger.error(f"Failed to discover sitemap: {e}")
-            logger.info("Using fallback configuration...")
-            base_url = "https://docs.anthropic.com"
-            sitemap_url = None
-        
-        # Discover documentation pages dynamically
-        if sitemap_url:
-            documentation_pages = discover_claude_code_pages(session, sitemap_url)
-        else:
-            # Use fallback pages if sitemap discovery failed
-            documentation_pages = [
-                "/en/docs/claude-code/overview",
-                "/en/docs/claude-code/setup",
-                "/en/docs/claude-code/quickstart",
-                "/en/docs/claude-code/memory",
-                "/en/docs/claude-code/common-workflows",
-                "/en/docs/claude-code/ide-integrations",
-                "/en/docs/claude-code/mcp",
-                "/en/docs/claude-code/github-actions",
-                "/en/docs/claude-code/sdk",
-                "/en/docs/claude-code/troubleshooting",
-                "/en/docs/claude-code/security",
-                "/en/docs/claude-code/settings",
-                "/en/docs/claude-code/hooks",
-                "/en/docs/claude-code/costs",
-                "/en/docs/claude-code/monitoring-usage",
-            ]
-        
-        if not documentation_pages:
+        # Discover documentation pages from both sources
+        claude_code_pages, agent_sdk_pages = discover_documentation_pages(session)
+
+        # Combine all pages
+        all_pages = claude_code_pages + agent_sdk_pages
+
+        if not all_pages:
             logger.error("No documentation pages discovered!")
             sys.exit(1)
-        
+
+        logger.info(f"Total pages to fetch: {len(all_pages)} ({len(claude_code_pages)} Claude Code + {len(agent_sdk_pages)} Agent SDK)")
+
         # Fetch each discovered page
-        for i, page_path in enumerate(documentation_pages, 1):
-            logger.info(f"Processing {i}/{len(documentation_pages)}: {page_path}")
-            
+        for i, (page_path, base_url) in enumerate(all_pages, 1):
+            logger.info(f"Processing {i}/{len(all_pages)}: {page_path}")
+
             try:
                 filename, content = fetch_markdown_content(page_path, session, base_url)
                 
@@ -585,47 +528,47 @@ def main():
                 
                 fetched_files.add(filename)
                 successful += 1
-                
+
                 # Rate limiting
-                if i < len(documentation_pages):
+                if i < len(all_pages):
                     time.sleep(RATE_LIMIT_DELAY)
                     
             except Exception as e:
                 logger.error(f"Failed to process {page_path}: {e}")
                 failed += 1
                 failed_pages.append(page_path)
-    
-    # Fetch Claude Code changelog
-    logger.info("Fetching Claude Code changelog...")
-    try:
-        filename, content = fetch_changelog(session)
-        # Check if content has changed
-        old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
-        old_entry = manifest.get("files", {}).get(filename, {})
-        
-        if content_has_changed(content, old_hash):
-            content_hash = save_markdown_file(docs_dir, filename, content)
-            logger.info(f"Updated: {filename}")
-            last_updated = datetime.now().isoformat()
-        else:
-            content_hash = old_hash
-            logger.info(f"Unchanged: {filename}")
-            last_updated = old_entry.get("last_updated", datetime.now().isoformat())
-        
-        new_manifest["files"][filename] = {
-            "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
-            "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-            "hash": content_hash,
-            "last_updated": last_updated,
-            "source": "claude-code-repository"
-        }
-        
-        fetched_files.add(filename)
-        successful += 1
-    except Exception as e:
-        logger.error(f"Failed to fetch changelog: {e}")
-        failed += 1
-        failed_pages.append("changelog")
+
+        # Fetch Claude Code changelog
+        logger.info("Fetching Claude Code changelog...")
+        try:
+            filename, content = fetch_changelog(session)
+            # Check if content has changed
+            old_hash = manifest.get("files", {}).get(filename, {}).get("hash", "")
+            old_entry = manifest.get("files", {}).get(filename, {})
+
+            if content_has_changed(content, old_hash):
+                content_hash = save_markdown_file(docs_dir, filename, content)
+                logger.info(f"Updated: {filename}")
+                last_updated = datetime.now().isoformat()
+            else:
+                content_hash = old_hash
+                logger.info(f"Unchanged: {filename}")
+                last_updated = old_entry.get("last_updated", datetime.now().isoformat())
+
+            new_manifest["files"][filename] = {
+                "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+                "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+                "hash": content_hash,
+                "last_updated": last_updated,
+                "source": "claude-code-repository"
+            }
+
+            fetched_files.add(filename)
+            successful += 1
+        except Exception as e:
+            logger.error(f"Failed to fetch changelog: {e}")
+            failed += 1
+            failed_pages.append("changelog")
     
     # Clean up old files (only those we previously fetched)
     cleanup_old_files(docs_dir, fetched_files, manifest)
@@ -634,14 +577,16 @@ def main():
     new_manifest["fetch_metadata"] = {
         "last_fetch_completed": datetime.now().isoformat(),
         "fetch_duration_seconds": (datetime.now() - start_time).total_seconds(),
-        "total_pages_discovered": len(documentation_pages),
+        "total_pages_discovered": len(all_pages),
+        "claude_code_pages": len(claude_code_pages),
+        "agent_sdk_pages": len(agent_sdk_pages),
         "pages_fetched_successfully": successful,
         "pages_failed": failed,
         "failed_pages": failed_pages,
-        "sitemap_url": sitemap_url,
-        "base_url": base_url,
+        "claude_code_sitemap": CLAUDE_CODE_SITEMAP,
+        "agent_sdk_sitemap": AGENT_SDK_SITEMAP,
         "total_files": len(fetched_files),
-        "fetch_tool_version": "3.0"
+        "fetch_tool_version": "4.0"
     }
     
     # Save new manifest
@@ -651,10 +596,10 @@ def main():
     duration = datetime.now() - start_time
     logger.info("\n" + "="*50)
     logger.info(f"Fetch completed in {duration}")
-    logger.info(f"Discovered pages: {len(documentation_pages)}")
-    logger.info(f"Successful: {successful}/{len(documentation_pages)}")
+    logger.info(f"Discovered pages: {len(all_pages)} ({len(claude_code_pages)} Claude Code + {len(agent_sdk_pages)} Agent SDK)")
+    logger.info(f"Successful: {successful}/{len(all_pages) + 1}")  # +1 for changelog
     logger.info(f"Failed: {failed}")
-    
+
     if failed_pages:
         logger.warning("\nFailed pages (will retry next run):")
         for page in failed_pages:

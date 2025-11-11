@@ -39,7 +39,7 @@ Anthropic retains Claude Code data based on your account type and preferences.
 
 * Users who allow data use for model improvement: 5-year retention period to support model development and safety improvements
 * Users who don't allow data use for model improvement: 30-day retention period
-* Privacy settings can be changed at any time at [claude.ai/settings/data-privacy-controls](claude.ai/settings/data-privacy-controls).
+* Privacy settings can be changed at any time at [claude.ai/settings/data-privacy-controls](https://claude.ai/settings/data-privacy-controls).
 
 **Commercial users (Team, Enterprise, and API)**:
 
@@ -53,7 +53,7 @@ For full details, please review our [Commercial Terms of Service](https://www.an
 
 ## Data flow and dependencies
 
-<img src="https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=4b30069d702719e7bfb974eaaafab21c" alt="Claude Code data flow diagram" data-og-width="1597" width="1597" data-og-height="1285" height="1285" data-path="images/claude-code-data-flow.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=280&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=067676caa12f89051cb193e6b3f7d0a0 280w, https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=560&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=5506197deff927f54f2fb5a349f358a8 560w, https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=840&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=bb4febe7974dde5b76b88744f89ab472 840w, https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=1100&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=b51af3074f87b33ccc342aaad655dcbf 1100w, https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=1650&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=8fd96f1dde615877d4e4bbe1874af12d 1650w, https://mintcdn.com/anthropic-claude-docs/LF5WV0SNF6oudpT5/images/claude-code-data-flow.png?w=2500&fit=max&auto=format&n=LF5WV0SNF6oudpT5&q=85&s=056deded541ec30e9b67a67d620f6aaf 2500w" />
+<img src="https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=4672f138596e864633b4b7c7ae4ae812" alt="Claude Code data flow diagram" data-og-width="1597" width="1597" data-og-height="1285" height="1285" data-path="images/claude-code-data-flow.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=280&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=5d9bdaf7ea50fc38dc01bbde7b952835 280w, https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=560&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=525736e5860ac9f262de4b40c9c68a0e 560w, https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=840&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=5262f9d1a1d0cffb0d5944e49b2d72be 840w, https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=1100&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=ec74e6b2f87b667f6d0e2278c20944de 1100w, https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=1650&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=05f11b1d061b6ddbb69969d4e535547a 1650w, https://mintcdn.com/claude-code/-YhHHmtSxwr7W8gy/images/claude-code-data-flow.png?w=2500&fit=max&auto=format&n=-YhHHmtSxwr7W8gy&q=85&s=9b9cce0fb5989bd1d27f143825be73ff 2500w" />
 
 Claude Code is installed from [NPM](https://www.npmjs.com/package/@anthropic-ai/claude-code). Claude Code runs locally. In order to interact with the LLM, Claude Code sends data over the network. This data includes all user prompts and model outputs. The data is encrypted in transit via TLS and is not encrypted at rest. Claude Code is compatible with most popular VPNs and LLM proxies.
 
@@ -65,7 +65,7 @@ Claude Code is built on Anthropic's APIs. For details regarding our API's securi
   The above data flow diagram and description applies to Claude Code CLI running locally on your machine. For cloud-based sessions using Claude Code on the web, see the section below.
 </Note>
 
-When using [Claude Code on the web](/en/docs/claude-code/claude-code-on-the-web), sessions run in Anthropic-managed virtual machines instead of locally. In cloud environments:
+When using [Claude Code on the web](/en/claude-code-on-the-web), sessions run in Anthropic-managed virtual machines instead of locally. In cloud environments:
 
 * **Code storage**: Your repository is cloned to an isolated VM and automatically deleted after session completion
 * **Credentials**: GitHub authentication is handled through a secure proxy; your GitHub credentials never enter the sandbox
@@ -73,7 +73,7 @@ When using [Claude Code on the web](/en/docs/claude-code/claude-code-on-the-web)
 * **Data retention**: Code and session data are subject to the retention and usage policies for your account type
 * **Session data**: Prompts, code changes, and outputs follow the same data policies as local Claude Code usage
 
-For security details about cloud execution, see [Security](/en/docs/claude-code/security#cloud-execution-security).
+For security details about cloud execution, see [Security](/en/security#cloud-execution-security).
 
 ## Telemetry services
 
@@ -93,4 +93,4 @@ By default, we disable all non-essential traffic (including error reporting, tel
 | **Sentry (Errors)**             | Default on.<br />`DISABLE_ERROR_REPORTING=1` to disable. | Default off.<br />`CLAUDE_CODE_USE_VERTEX` must be 1. | Default off.<br />`CLAUDE_CODE_USE_BEDROCK` must be 1. |
 | **Claude API (`/bug` reports)** | Default on.<br />`DISABLE_BUG_COMMAND=1` to disable.     | Default off.<br />`CLAUDE_CODE_USE_VERTEX` must be 1. | Default off.<br />`CLAUDE_CODE_USE_BEDROCK` must be 1. |
 
-All environment variables can be checked into `settings.json` ([read more](/en/docs/claude-code/settings)).
+All environment variables can be checked into `settings.json` ([read more](/en/settings)).

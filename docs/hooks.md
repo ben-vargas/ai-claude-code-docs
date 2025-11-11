@@ -3,12 +3,12 @@
 > This page provides reference documentation for implementing hooks in Claude Code.
 
 <Tip>
-  For a quickstart guide with examples, see [Get started with Claude Code hooks](/en/docs/claude-code/hooks-guide).
+  For a quickstart guide with examples, see [Get started with Claude Code hooks](/en/hooks-guide).
 </Tip>
 
 ## Configuration
 
-Claude Code hooks are configured in your [settings files](/en/docs/claude-code/settings):
+Claude Code hooks are configured in your [settings files](/en/settings):
 
 * `~/.claude/settings.json` - User settings
 * `.claude/settings.json` - Project settings
@@ -49,7 +49,7 @@ Hooks are organized by matchers, where each matcher can have multiple hooks:
   * `prompt`: (For `type: "prompt"`) The prompt to send to the LLM for evaluation
   * `timeout`: (Optional) How long a hook should run, in seconds, before canceling that specific hook
 
-For events like `UserPromptSubmit`, `Notification`, `Stop`, and `SubagentStop`
+For events like `UserPromptSubmit`, `Stop`, and `SubagentStop`
 that don't use matchers, you can omit the matcher field:
 
 ```json  theme={null}
@@ -95,7 +95,7 @@ ensuring they work regardless of Claude's current directory:
 
 ### Plugin hooks
 
-[Plugins](/en/docs/claude-code/plugins) can provide hooks that integrate seamlessly with your user and project hooks. Plugin hooks are automatically merged with your configuration when plugins are enabled.
+[Plugins](/en/plugins) can provide hooks that integrate seamlessly with your user and project hooks. Plugin hooks are automatically merged with your configuration when plugins are enabled.
 
 **How plugin hooks work**:
 
@@ -140,7 +140,7 @@ ensuring they work regardless of Claude's current directory:
 * `${CLAUDE_PROJECT_DIR}`: Project root directory (same as for project hooks)
 * All standard environment variables are available
 
-See the [plugin components reference](/en/docs/claude-code/plugins-reference#hooks) for details on creating plugin hooks.
+See the [plugin components reference](/en/plugins-reference#hooks) for details on creating plugin hooks.
 
 ## Prompt-Based Hooks
 
@@ -270,7 +270,7 @@ Prompt-based hooks work with any hook event, but are most useful for:
 * **Set appropriate timeouts**: Default is 30 seconds, adjust if needed
 * **Use for complex decisions**: Bash hooks are better for simple, deterministic rules
 
-See the [plugin components reference](/en/docs/claude-code/plugins-reference#hooks) for details on creating plugin hooks.
+See the [plugin components reference](/en/plugins-reference#hooks) for details on creating plugin hooks.
 
 ## Hook Events
 
@@ -280,7 +280,7 @@ Runs after Claude creates tool parameters and before processing the tool call.
 
 **Common matchers:**
 
-* `Task` - Subagent tasks (see [subagents documentation](/en/docs/claude-code/sub-agents))
+* `Task` - Subagent tasks (see [subagents documentation](/en/sub-agents))
 * `Bash` - Shell commands
 * `Glob` - File pattern matching
 * `Grep` - Content search
@@ -297,12 +297,45 @@ Recognizes the same matcher values as PreToolUse.
 
 ### Notification
 
-Runs when Claude Code sends notifications. Notifications are sent when:
+Runs when Claude Code sends notifications. Supports matchers to filter by notification type.
 
-1. Claude needs your permission to use a tool. Example: "Claude needs your
-   permission to use Bash"
-2. The prompt input has been idle for at least 60 seconds. "Claude is waiting
-   for your input"
+**Common matchers:**
+
+* `permission_prompt` - Permission requests from Claude Code
+* `idle_prompt` - When Claude is waiting for user input (after 60+ seconds of idle time)
+* `auth_success` - Authentication success notifications
+* `elicitation_dialog` - When Claude Code needs input for MCP tool elicitation
+
+You can use matchers to run different hooks for different notification types, or omit the matcher to run hooks for all notifications.
+
+**Example: Different notifications for different types**
+
+```json  theme={null}
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/permission-alert.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/idle-notification.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ### UserPromptSubmit
 
@@ -468,7 +501,8 @@ The exact schema for `tool_input` and `tool_response` depends on the tool.
   "cwd": "/Users/...",
   "permission_mode": "default",
   "hook_event_name": "Notification",
-  "message": "Task completed successfully"
+  "message": "Claude needs your permission to use Bash",
+  "notification_type": "permission_prompt"
 }
 ```
 
@@ -871,7 +905,7 @@ sys.exit(0)
 ## Working with MCP Tools
 
 Claude Code hooks work seamlessly with
-[Model Context Protocol (MCP) tools](/en/docs/claude-code/mcp). When MCP servers
+[Model Context Protocol (MCP) tools](/en/mcp). When MCP servers
 provide tools, they appear with a special naming pattern that you can match in
 your hooks.
 
@@ -917,7 +951,7 @@ You can target specific MCP tools or entire MCP servers:
 ## Examples
 
 <Tip>
-  For practical examples including code formatting, notifications, and file protection, see [More Examples](/en/docs/claude-code/hooks-guide#more-examples) in the get started guide.
+  For practical examples including code formatting, notifications, and file protection, see [More Examples](/en/hooks-guide#more-examples) in the get started guide.
 </Tip>
 
 ## Security Considerations
