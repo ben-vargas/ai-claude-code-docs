@@ -23,25 +23,25 @@ To install Claude Code, use one of the following methods:
   <Tab title="Native Install (Recommended)">
     **Homebrew (macOS, Linux):**
 
-    ```sh  theme={null}
+    ```sh theme={null} theme={null} theme={null} theme={null}
     brew install --cask claude-code
     ```
 
     **macOS, Linux, WSL:**
 
-    ```bash  theme={null}
+    ```bash theme={null} theme={null} theme={null} theme={null}
     curl -fsSL https://claude.ai/install.sh | bash
     ```
 
     **Windows PowerShell:**
 
-    ```powershell  theme={null}
+    ```powershell theme={null} theme={null} theme={null} theme={null}
     irm https://claude.ai/install.ps1 | iex
     ```
 
     **Windows CMD:**
 
-    ```batch  theme={null}
+    ```batch theme={null} theme={null} theme={null} theme={null}
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
     ```
   </Tab>
@@ -49,7 +49,7 @@ To install Claude Code, use one of the following methods:
   <Tab title="NPM">
     If you have [Node.js 18 or newer installed](https://nodejs.org/en/download/):
 
-    ```sh  theme={null}
+    ```sh theme={null} theme={null} theme={null} theme={null}
     npm install -g @anthropic-ai/claude-code
     ```
   </Tab>
@@ -162,6 +162,13 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd 1.0.58 &&
 <Tip>
   Make sure that you remove any outdated aliases or symlinks before installing.
 </Tip>
+
+**Binary integrity and code signing**
+
+* SHA256 checksums for all platforms are published in the release manifests, currently located at `https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/{VERSION}/manifest.json` (example: replace `{VERSION}` with `2.0.30`)
+* Signed binaries are distributed for the following platforms:
+  * macOS: Signed by "Anthropic PBC" and notarized by Apple
+  * Windows: Signed by "Anthropic, PBC"
 
 ### NPM installation
 
