@@ -29,8 +29,8 @@ Claude Code on the web is available in research preview to:
 
 * **Pro users**
 * **Max users**
-
-Coming soon to Team and Enterprise premium seat users.
+* **Team premium seat users**
+* **Enterprise premium seat users**
 
 ## Getting started
 
