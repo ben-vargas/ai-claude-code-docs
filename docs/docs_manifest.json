@@ -21,8 +21,8 @@
     "claude-code-on-the-web.md": {
       "original_url": "https://code.claude.com/docs/en/claude-code-on-the-web",
       "original_md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
-      "hash": "e9e191d03031ad481d30645bd1f86dd19ad59d9319be4e73cfd6106c88b96d95",
-      "last_updated": "2025-11-13T00:22:53.530064"
+      "hash": "6f63ca5167f3879ff91071d5dc2af87eada021f388e756cf122fadef7265fbf0",
+      "last_updated": "2025-11-14T03:25:55.663143"
     },
     "cli-reference.md": {
       "original_url": "https://code.claude.com/docs/en/cli-reference",
@@ -369,8 +369,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-14T00:23:59.967762",
-    "fetch_duration_seconds": 36.155846,
+    "last_fetch_completed": "2025-11-14T03:26:34.028255",
+    "fetch_duration_seconds": 42.322794,
     "total_pages_discovered": 60,
     "claude_code_pages": 44,
     "agent_sdk_pages": 16,
@@ -389,7 +389,7 @@
     "total_files": 61,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-14T00:23:59.967794",
+  "last_updated": "2025-11-14T03:26:34.028316",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
