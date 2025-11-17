@@ -363,8 +363,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-17T03:28:40.455957",
-    "fetch_duration_seconds": 39.58422,
+    "last_fetch_completed": "2025-11-17T06:09:23.231898",
+    "fetch_duration_seconds": 41.072985,
     "total_pages_discovered": 60,
     "claude_code_pages": 44,
     "agent_sdk_pages": 16,
@@ -385,7 +385,7 @@
     "total_files": 60,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-17T03:28:40.456008",
+  "last_updated": "2025-11-17T06:09:23.231933",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
