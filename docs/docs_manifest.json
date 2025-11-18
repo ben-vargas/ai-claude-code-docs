@@ -141,8 +141,8 @@
     "monitoring-usage.md": {
       "original_url": "https://code.claude.com/docs/en/monitoring-usage",
       "original_md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
-      "hash": "580c4648a222e552e7f9a7f7c72df49f006607ad74bb862fce5f2d202df6f158",
-      "last_updated": "2025-11-10T18:45:23.192866"
+      "hash": "6c4df4844e7f9e78ccdad3bc1bcef6c139c2f87863cb15ec33d42925f4116a1a",
+      "last_updated": "2025-11-18T09:06:43.215144"
     },
     "network-config.md": {
       "original_url": "https://code.claude.com/docs/en/network-config",
@@ -363,8 +363,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-18T06:08:50.547689",
-    "fetch_duration_seconds": 40.014746,
+    "last_fetch_completed": "2025-11-18T09:07:07.883868",
+    "fetch_duration_seconds": 39.794541,
     "total_pages_discovered": 60,
     "claude_code_pages": 44,
     "agent_sdk_pages": 16,
@@ -385,7 +385,7 @@
     "total_files": 60,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-18T06:08:50.547723",
+  "last_updated": "2025-11-18T09:07:07.883905",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
