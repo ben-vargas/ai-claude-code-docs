@@ -258,6 +258,13 @@
       "hash": "dc752054907706ffad102f871dea77def1897d17150b542590cf831afcd88cae",
       "last_updated": "2025-11-10T18:45:36.639928"
     },
+    "changelog.md": {
+      "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+      "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+      "hash": "2ea52c7b41b5c221848b5715d2f62e0ea276c09254b611c45880a51b774fb92a",
+      "last_updated": "2025-11-18T03:25:53.146890",
+      "source": "claude-code-repository"
+    },
     "agent-sdk__cost-tracking.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/cost-tracking",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/cost-tracking.md",
@@ -353,39 +360,31 @@
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/typescript.md",
       "hash": "2c70a994a2fff46e2b8067a4ddc8c2930a68afbc774bdb55a3d4a68409e4a245",
       "last_updated": "2025-11-10T18:45:45.497835"
-    },
-    "changelog.md": {
-      "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
-      "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "2ea52c7b41b5c221848b5715d2f62e0ea276c09254b611c45880a51b774fb92a",
-      "last_updated": "2025-11-18T03:25:53.146890",
-      "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-18T09:07:07.883868",
-    "fetch_duration_seconds": 39.794541,
-    "total_pages_discovered": 60,
+    "last_fetch_completed": "2025-11-18T12:09:40.948466",
+    "fetch_duration_seconds": 30.370009,
+    "total_pages_discovered": 44,
     "claude_code_pages": 44,
-    "agent_sdk_pages": 16,
-    "pages_fetched_successfully": 60,
+    "agent_sdk_pages": 0,
+    "pages_fetched_successfully": 44,
     "pages_failed": 1,
     "failed_pages": [
       "/docs/en/sdk/migration-guide"
     ],
     "successful_sources": [
-      "agent_sdk",
       "changelog",
       "claude_code"
     ],
     "claude_code_sitemap": "https://code.claude.com/docs/sitemap.xml",
     "agent_sdk_sitemap": "https://docs.anthropic.com/sitemap.xml",
-    "files_fetched_this_run": 60,
-    "files_preserved_from_previous": 0,
+    "files_fetched_this_run": 44,
+    "files_preserved_from_previous": 16,
     "total_files": 60,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-18T09:07:07.883905",
+  "last_updated": "2025-11-18T12:09:40.948513",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
