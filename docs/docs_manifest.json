@@ -33,8 +33,8 @@
     "cli-reference.md": {
       "original_url": "https://code.claude.com/docs/en/cli-reference",
       "original_md_url": "https://code.claude.com/docs/en/cli-reference.md",
-      "hash": "18fbb91b734b2d8b1e5f3593b4c73c01cd3a5efcd80adce84fd14b69be9b713e",
-      "last_updated": "2025-11-10T18:45:10.252400"
+      "hash": "dc1aaa8c702736b9f2ac1da68217fc0b7a8fea0049a6dd7371ebccb153e500e0",
+      "last_updated": "2025-11-19T03:25:08.121303"
     },
     "common-workflows.md": {
       "original_url": "https://code.claude.com/docs/en/common-workflows",
@@ -375,8 +375,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-19T00:24:15.343086",
-    "fetch_duration_seconds": 41.608657,
+    "last_fetch_completed": "2025-11-19T03:25:45.529985",
+    "fetch_duration_seconds": 41.974451,
     "total_pages_discovered": 62,
     "claude_code_pages": 45,
     "agent_sdk_pages": 17,
@@ -397,7 +397,7 @@
     "total_files": 62,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-19T00:24:15.343118",
+  "last_updated": "2025-11-19T03:25:45.530020",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
