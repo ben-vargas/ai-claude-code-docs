@@ -123,8 +123,8 @@
     "llm-gateway.md": {
       "original_url": "https://code.claude.com/docs/en/llm-gateway",
       "original_md_url": "https://code.claude.com/docs/en/llm-gateway.md",
-      "hash": "0b2f2340f03d8f32ab6a35d2a7fa74ce97a7aab3882588b9758c9c5bd6ff3bae",
-      "last_updated": "2025-11-16T00:24:58.204581"
+      "hash": "a4f7a542d8cdfc943304b70861adc505acf9955d8426fe14385ffe8e66f2e0dc",
+      "last_updated": "2025-11-19T00:23:47.111957"
     },
     "mcp.md": {
       "original_url": "https://code.claude.com/docs/en/mcp",
@@ -207,8 +207,8 @@
     "settings.md": {
       "original_url": "https://code.claude.com/docs/en/settings",
       "original_md_url": "https://code.claude.com/docs/en/settings.md",
-      "hash": "0c38480a6af0fbaf0de168afd7cfe76e68d18db32ea2c14b111d4d8ded396c96",
-      "last_updated": "2025-11-18T18:08:12.880682"
+      "hash": "f23a4a727afb019d53fe0a91972c76344e2838a8ea341cc2862534778e59f689",
+      "last_updated": "2025-11-19T00:24:00.900853"
     },
     "setup.md": {
       "original_url": "https://code.claude.com/docs/en/setup",
@@ -375,8 +375,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-18T18:08:55.733574",
-    "fetch_duration_seconds": 69.280425,
+    "last_fetch_completed": "2025-11-19T00:24:15.343086",
+    "fetch_duration_seconds": 41.608657,
     "total_pages_discovered": 62,
     "claude_code_pages": 45,
     "agent_sdk_pages": 17,
@@ -397,7 +397,7 @@
     "total_files": 62,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-18T18:08:55.733599",
+  "last_updated": "2025-11-19T00:24:15.343118",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
