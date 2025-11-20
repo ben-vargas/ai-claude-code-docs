@@ -123,8 +123,8 @@
     "mcp.md": {
       "original_url": "https://code.claude.com/docs/en/mcp",
       "original_md_url": "https://code.claude.com/docs/en/mcp.md",
-      "hash": "9e017c0ae4d5a4dbd8b77a7b72f881d0a42f69019580783653b565b6c9d5d7a7",
-      "last_updated": "2025-11-10T18:45:21.234263"
+      "hash": "b0181e4e093783e16323fb349e68e307cef40750175ebc8ddb512fa006a3902b",
+      "last_updated": "2025-11-20T18:08:29.933946"
     },
     "memory.md": {
       "original_url": "https://code.claude.com/docs/en/memory",
@@ -375,8 +375,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-20T15:06:31.438149",
-    "fetch_duration_seconds": 41.308942,
+    "last_fetch_completed": "2025-11-20T18:09:01.407242",
+    "fetch_duration_seconds": 45.918125,
     "total_pages_discovered": 62,
     "claude_code_pages": 45,
     "agent_sdk_pages": 17,
@@ -397,7 +397,7 @@
     "total_files": 62,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-20T15:06:31.438184",
+  "last_updated": "2025-11-20T18:09:01.407276",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
