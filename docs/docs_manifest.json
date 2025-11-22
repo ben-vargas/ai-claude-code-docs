@@ -303,8 +303,8 @@
     "agent-sdk__overview.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/overview",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/overview.md",
-      "hash": "074ba283c96952e09b639b867024ce8383c6a191653579e3ace7d39befad959f",
-      "last_updated": "2025-11-21T00:23:32.062734"
+      "hash": "0265c4c839047c5b3e990566d93296b739e3350243d5978505e1a0915bd3ec31",
+      "last_updated": "2025-11-22T06:07:49.883718"
     },
     "agent-sdk__permissions.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/permissions",
@@ -381,8 +381,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-22T03:21:44.746724",
-    "fetch_duration_seconds": 39.263154,
+    "last_fetch_completed": "2025-11-22T06:07:56.192442",
+    "fetch_duration_seconds": 37.886504,
     "total_pages_discovered": 62,
     "claude_code_pages": 45,
     "agent_sdk_pages": 17,
@@ -401,7 +401,7 @@
     "total_files": 63,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-22T03:21:44.746759",
+  "last_updated": "2025-11-22T06:07:56.192476",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
