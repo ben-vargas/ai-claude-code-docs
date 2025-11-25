@@ -375,8 +375,8 @@
     "agent-sdk__typescript.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/typescript",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/typescript.md",
-      "hash": "b8abbac2dd38bf773dcd1d2415318d0451d7c96f0d1234af59bf7f64e9d39e0c",
-      "last_updated": "2025-11-19T21:05:55.610711"
+      "hash": "a0ac1b3a2dd6d0d03ca361a36e89e5577e0bf8d289c54264783cfa8d4567a0ce",
+      "last_updated": "2025-11-25T21:06:22.112771"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-25T18:08:28.719571",
-    "fetch_duration_seconds": 38.096468,
+    "last_fetch_completed": "2025-11-25T21:06:22.188677",
+    "fetch_duration_seconds": 56.407209,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-25T18:08:28.719611",
+  "last_updated": "2025-11-25T21:06:22.188711",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
