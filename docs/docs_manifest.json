@@ -327,8 +327,8 @@
     "agent-sdk__python.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/python",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/python.md",
-      "hash": "e33669a515e37283fbd51e41971263b4db5f251753d62ebb4e64a0fec4920a80",
-      "last_updated": "2025-11-19T21:05:50.731152"
+      "hash": "f8b83a49f4418e83b44f8a11eb8943204fe2275cd3e56f8a99dac583e38a0fcc",
+      "last_updated": "2025-11-26T21:05:35.007812"
     },
     "agent-sdk__sessions.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/sessions",
@@ -375,8 +375,8 @@
     "agent-sdk__typescript.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/typescript",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/typescript.md",
-      "hash": "a0ac1b3a2dd6d0d03ca361a36e89e5577e0bf8d289c54264783cfa8d4567a0ce",
-      "last_updated": "2025-11-25T21:06:22.112771"
+      "hash": "67853a1a8332119169447ba53e5b8b13dc3b607a3bdfc8ce0c3ffdf18e47346d",
+      "last_updated": "2025-11-26T21:05:40.252511"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-26T18:07:43.861904",
-    "fetch_duration_seconds": 38.596565,
+    "last_fetch_completed": "2025-11-26T21:05:40.268929",
+    "fetch_duration_seconds": 38.771186,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-26T18:07:43.861927",
+  "last_updated": "2025-11-26T21:05:40.268966",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
