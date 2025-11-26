@@ -177,8 +177,8 @@
     "plugin-marketplaces.md": {
       "original_url": "https://code.claude.com/docs/en/plugin-marketplaces",
       "original_md_url": "https://code.claude.com/docs/en/plugin-marketplaces.md",
-      "hash": "a4404e754a982922d50e6604b14df32a3c279bcf6672c68d419410bbe467e953",
-      "last_updated": "2025-11-10T18:45:25.938205"
+      "hash": "a0fe69dcded722610d272644ee630c915fae87ea161d7d8ad582c70014357dfa",
+      "last_updated": "2025-11-26T00:23:23.283874"
     },
     "plugins.md": {
       "original_url": "https://code.claude.com/docs/en/plugins",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-11-25T21:06:22.188677",
-    "fetch_duration_seconds": 56.407209,
+    "last_fetch_completed": "2025-11-26T00:23:43.242106",
+    "fetch_duration_seconds": 38.698758,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-11-25T21:06:22.188711",
+  "last_updated": "2025-11-26T00:23:43.242141",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
