@@ -315,8 +315,8 @@
     "agent-sdk__permissions.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/permissions",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/permissions.md",
-      "hash": "2a3dc4be07ac50339bccd1743d364d788a3e16cefb366e1838d9eaf6e8fcea79",
-      "last_updated": "2025-11-19T21:05:49.540037"
+      "hash": "62218d7040353baffdad98d3a89a61801e703a80651b825f52926afbdb754a3d",
+      "last_updated": "2025-12-01T21:05:59.439284"
     },
     "agent-sdk__plugins.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/plugins",
@@ -351,8 +351,8 @@
     "agent-sdk__streaming-vs-single-mode.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/streaming-vs-single-mode",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/streaming-vs-single-mode.md",
-      "hash": "7f5b8fb2169bd812ac0d6385558bd76df12982ff0ec23eaf1e45815650064b15",
-      "last_updated": "2025-11-19T21:05:53.130799"
+      "hash": "936bba60eba33a99bf858a981dc6c0ce9d8a0769a4269f68ad41b1d540599168",
+      "last_updated": "2025-12-01T21:06:03.211846"
     },
     "agent-sdk__structured-outputs.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/structured-outputs",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-01T18:09:08.812031",
-    "fetch_duration_seconds": 40.020575,
+    "last_fetch_completed": "2025-12-01T21:06:05.698798",
+    "fetch_duration_seconds": 40.040386,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-01T18:09:08.812065",
+  "last_updated": "2025-12-01T21:06:05.698834",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
