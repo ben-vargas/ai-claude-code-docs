@@ -249,8 +249,8 @@
     "sub-agents.md": {
       "original_url": "https://code.claude.com/docs/en/sub-agents",
       "original_md_url": "https://code.claude.com/docs/en/sub-agents.md",
-      "hash": "04e53693f79a1da0749ad391779f898f27ca82075d8b08a1080f0b2b78966306",
-      "last_updated": "2025-11-27T06:08:50.239656"
+      "hash": "67c4b290ac00968e3ca3e532231f077f70f0c45f279d0b9b995781d025b9c79b",
+      "last_updated": "2025-12-02T00:23:58.605431"
     },
     "terminal-config.md": {
       "original_url": "https://code.claude.com/docs/en/terminal-config",
@@ -291,8 +291,8 @@
     "agent-sdk__hosting.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/hosting",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/hosting.md",
-      "hash": "d1b565d6f13db03abe7ad824c0a5890b43d3a65b1839443e1e58371019c01833",
-      "last_updated": "2025-11-19T21:05:47.077466"
+      "hash": "0f3ea3de314a9c6345b14db79179c3bdc96832cf82b20dea30584e0c5312204f",
+      "last_updated": "2025-12-02T00:24:02.861258"
     },
     "agent-sdk__mcp.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/mcp",
@@ -327,8 +327,8 @@
     "agent-sdk__python.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/python",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/python.md",
-      "hash": "f8b83a49f4418e83b44f8a11eb8943204fe2275cd3e56f8a99dac583e38a0fcc",
-      "last_updated": "2025-11-26T21:05:35.007812"
+      "hash": "93fbf63e9237d4992b782cc055b809a5cb5eff0f148ccaec9bbeb52adc3f8848",
+      "last_updated": "2025-12-02T00:24:06.824643"
     },
     "agent-sdk__sessions.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/sessions",
@@ -375,8 +375,8 @@
     "agent-sdk__typescript.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/typescript",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/typescript.md",
-      "hash": "67853a1a8332119169447ba53e5b8b13dc3b607a3bdfc8ce0c3ffdf18e47346d",
-      "last_updated": "2025-11-26T21:05:40.252511"
+      "hash": "f31a56d6968077b8818f868e87750583e4fd0ab1ad758f2ae5b76203f10e01e1",
+      "last_updated": "2025-12-02T00:24:12.451906"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-01T21:06:05.698798",
-    "fetch_duration_seconds": 40.040386,
+    "last_fetch_completed": "2025-12-02T00:24:12.599975",
+    "fetch_duration_seconds": 39.710668,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-01T21:06:05.698834",
+  "last_updated": "2025-12-02T00:24:12.600006",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
