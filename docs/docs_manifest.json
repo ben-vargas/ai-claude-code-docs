@@ -135,8 +135,8 @@
     "memory.md": {
       "original_url": "https://code.claude.com/docs/en/memory",
       "original_md_url": "https://code.claude.com/docs/en/memory.md",
-      "hash": "0c0e596f32c49172f82cf75c1d27527f3f299e8e0b04e351761e66ce8a27b5b4",
-      "last_updated": "2025-11-27T06:08:39.240516"
+      "hash": "647ebd69225e515b92a716e0a0f0826332c4f6ccebbc98ed2ca113abc60834bf",
+      "last_updated": "2025-12-02T21:05:53.501241"
     },
     "microsoft-foundry.md": {
       "original_url": "https://code.claude.com/docs/en/microsoft-foundry",
@@ -219,8 +219,8 @@
     "settings.md": {
       "original_url": "https://code.claude.com/docs/en/settings",
       "original_md_url": "https://code.claude.com/docs/en/settings.md",
-      "hash": "271b2c72cc73f2412555214fd9f88a8461ac4ce2e5a38804a7557dcc5f2acfee",
-      "last_updated": "2025-12-01T03:37:25.474472"
+      "hash": "2174bc19e158d45d66b70a74d307d2f424cb15851afdac783af5131963ef22da",
+      "last_updated": "2025-12-02T21:06:02.156285"
     },
     "setup.md": {
       "original_url": "https://code.claude.com/docs/en/setup",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-02T18:09:31.101286",
-    "fetch_duration_seconds": 44.221567,
+    "last_fetch_completed": "2025-12-02T21:06:18.843725",
+    "fetch_duration_seconds": 40.560901,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-02T18:09:31.101324",
+  "last_updated": "2025-12-02T21:06:18.843760",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
