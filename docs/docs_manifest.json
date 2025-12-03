@@ -309,8 +309,8 @@
     "agent-sdk__overview.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/overview",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/overview.md",
-      "hash": "0265c4c839047c5b3e990566d93296b739e3350243d5978505e1a0915bd3ec31",
-      "last_updated": "2025-11-22T06:07:49.883718"
+      "hash": "feb00bf910cdbfdd33cf762b52bbe8f4b28e7b416f4b2ee36a72349d1d570a3a",
+      "last_updated": "2025-12-03T21:06:06.198029"
     },
     "agent-sdk__permissions.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/permissions",
@@ -375,20 +375,20 @@
     "agent-sdk__typescript.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/typescript",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/typescript.md",
-      "hash": "f31a56d6968077b8818f868e87750583e4fd0ab1ad758f2ae5b76203f10e01e1",
-      "last_updated": "2025-12-02T00:24:12.451906"
+      "hash": "58b6c92a3a30e338a4ce1886b684edd78ba2780ef9a1c1569160e002b918d6bf",
+      "last_updated": "2025-12-03T21:06:13.786985"
     },
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "b5d8a6dad30a6783313034926d798877b8aae3e280371f69633a6f50cbd1aa4d",
-      "last_updated": "2025-12-03T15:07:15.972516",
+      "hash": "0d12c1b3f25b92fb0a122f1b13bcf12fab24cc6046f937cc985af2d0b6cf5b0e",
+      "last_updated": "2025-12-03T21:06:13.799101",
       "source": "claude-code-repository"
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-03T18:09:16.479406",
-    "fetch_duration_seconds": 40.800175,
+    "last_fetch_completed": "2025-12-03T21:06:13.799572",
+    "fetch_duration_seconds": 41.175209,
     "total_pages_discovered": 63,
     "claude_code_pages": 46,
     "agent_sdk_pages": 17,
@@ -407,7 +407,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-03T18:09:16.479442",
+  "last_updated": "2025-12-03T21:06:13.799599",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
