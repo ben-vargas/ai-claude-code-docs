@@ -1,12 +1,5 @@
 {
   "files": {
-    "changelog.md": {
-      "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
-      "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "ff38c50e6f6331cc24d51426f0a78904d76b2176409915ced9be70631ca6e9f3",
-      "last_updated": "2025-12-05T00:24:46.379801",
-      "source": "claude-code-repository"
-    },
     "amazon-bedrock.md": {
       "original_url": "https://code.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://code.claude.com/docs/en/amazon-bedrock.md",
@@ -283,6 +276,13 @@
       "hash": "873c0c7a254b6c56c18ede51867e4d26063ebaafb2028756e1178e275df41242",
       "last_updated": "2025-12-04T21:06:14.594394"
     },
+    "changelog.md": {
+      "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+      "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+      "hash": "ff38c50e6f6331cc24d51426f0a78904d76b2176409915ced9be70631ca6e9f3",
+      "last_updated": "2025-12-05T00:24:46.379801",
+      "source": "claude-code-repository"
+    },
     "agent-sdk__cost-tracking.md": {
       "original_url": "https://docs.claude.com/en/docs/agent-sdk/cost-tracking",
       "original_md_url": "https://docs.claude.com/en/docs/agent-sdk/cost-tracking.md",
@@ -387,33 +387,26 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-05T09:07:16.201797",
-    "fetch_duration_seconds": 30.770166,
-    "total_pages_discovered": 7,
-    "claude_code_pages": 7,
+    "last_fetch_completed": "2025-12-05T12:10:41.734329",
+    "fetch_duration_seconds": 27.228342,
+    "total_pages_discovered": 46,
+    "claude_code_pages": 46,
     "agent_sdk_pages": 0,
-    "pages_fetched_successfully": 1,
-    "pages_failed": 7,
-    "failed_pages": [
-      "/docs/en/overview",
-      "/docs/en/setup",
-      "/docs/en/quickstart",
-      "/docs/en/memory",
-      "/docs/en/common-workflows",
-      "/docs/en/mcp",
-      "/docs/en/hooks"
-    ],
+    "pages_fetched_successfully": 47,
+    "pages_failed": 0,
+    "failed_pages": [],
     "successful_sources": [
-      "changelog"
+      "changelog",
+      "claude_code"
     ],
     "claude_code_sitemap": "https://code.claude.com/docs/sitemap.xml",
     "agent_sdk_sitemap": "https://docs.anthropic.com/sitemap.xml",
-    "files_fetched_this_run": 1,
-    "files_preserved_from_previous": 63,
+    "files_fetched_this_run": 47,
+    "files_preserved_from_previous": 17,
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-05T09:07:16.201839",
+  "last_updated": "2025-12-05T12:10:41.734362",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
