@@ -129,8 +129,8 @@
     "mcp.md": {
       "original_url": "https://code.claude.com/docs/en/mcp",
       "original_md_url": "https://code.claude.com/docs/en/mcp.md",
-      "hash": "234059c2accbf9cffb0d3626b63c7e13c23cbfdb090a1e0381b7bc70447ed577",
-      "last_updated": "2025-12-05T00:24:25.068273"
+      "hash": "befb9fb7950e7ef7da063147e64925c2bb1a1b233ba3c49029314efd1ca94efd",
+      "last_updated": "2025-12-06T18:06:59.243325"
     },
     "memory.md": {
       "original_url": "https://code.claude.com/docs/en/memory",
@@ -225,8 +225,8 @@
     "setup.md": {
       "original_url": "https://code.claude.com/docs/en/setup",
       "original_md_url": "https://code.claude.com/docs/en/setup.md",
-      "hash": "295cbe3a750fd868efa9b38fbac05b2b3134f9cc3ae05cfff620b43afc054677",
-      "last_updated": "2025-12-04T03:31:12.077297"
+      "hash": "d3b8a532d2d54175f8a38620bfc0d068ada43b1058b9d783708c5e2acb876857",
+      "last_updated": "2025-12-06T18:07:08.963586"
     },
     "skills.md": {
       "original_url": "https://code.claude.com/docs/en/skills",
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-06T15:05:18.639569",
-    "fetch_duration_seconds": 26.434494,
+    "last_fetch_completed": "2025-12-06T18:07:13.759075",
+    "fetch_duration_seconds": 27.303541,
     "total_pages_discovered": 46,
     "claude_code_pages": 46,
     "agent_sdk_pages": 0,
@@ -406,7 +406,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-06T15:05:18.639603",
+  "last_updated": "2025-12-06T18:07:13.759105",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
