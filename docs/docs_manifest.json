@@ -279,8 +279,8 @@
     "changelog.md": {
       "original_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "original_raw_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
-      "hash": "13b03d75088fb2db5a9746803bd1205107ab055dd34b8b04f1d64f946d9aa326",
-      "last_updated": "2025-12-06T00:22:31.800244",
+      "hash": "25d96b65ba8269503563f9fbd15d90f740a59b9e31ab18ff938d6a6aedaaa9c8",
+      "last_updated": "2025-12-07T12:08:35.868002",
       "source": "claude-code-repository"
     },
     "agent-sdk__cost-tracking.md": {
@@ -387,8 +387,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-07T09:05:45.125269",
-    "fetch_duration_seconds": 26.401345,
+    "last_fetch_completed": "2025-12-07T12:08:35.869525",
+    "fetch_duration_seconds": 26.032326,
     "total_pages_discovered": 46,
     "claude_code_pages": 46,
     "agent_sdk_pages": 0,
@@ -406,7 +406,7 @@
     "total_files": 64,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-07T09:05:45.125302",
+  "last_updated": "2025-12-07T12:08:35.869552",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
