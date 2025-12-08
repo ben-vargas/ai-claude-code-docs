@@ -225,14 +225,20 @@
     "setup.md": {
       "original_url": "https://code.claude.com/docs/en/setup",
       "original_md_url": "https://code.claude.com/docs/en/setup.md",
-      "hash": "a55d0376bc7e828fff396b663ca782bb6c2fca193c271bababdb148f6d38446e",
-      "last_updated": "2025-12-08T06:09:53.505250"
+      "hash": "322d138e5e559243bb1a546dfc7a2e5fcad4000c43746bb06bbf2d155296c05d",
+      "last_updated": "2025-12-08T21:05:44.738432"
     },
     "skills.md": {
       "original_url": "https://code.claude.com/docs/en/skills",
       "original_md_url": "https://code.claude.com/docs/en/skills.md",
       "hash": "67d1a207d9b79d690cddd87ddfd9086b26dc2186f8f26a3da21eed041b1db62d",
       "last_updated": "2025-12-08T00:24:36.566682"
+    },
+    "slack.md": {
+      "original_url": "https://code.claude.com/docs/en/slack",
+      "original_md_url": "https://code.claude.com/docs/en/slack.md",
+      "hash": "5ee26ba61c0f38fd4fc0753163927d5952862e915790d053aa35b75b1ba656cd",
+      "last_updated": "2025-12-08T21:05:46.011375"
     },
     "slash-commands.md": {
       "original_url": "https://code.claude.com/docs/en/slash-commands",
@@ -387,12 +393,12 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-08T18:08:44.439791",
-    "fetch_duration_seconds": 27.625311,
-    "total_pages_discovered": 46,
-    "claude_code_pages": 46,
+    "last_fetch_completed": "2025-12-08T21:05:50.231681",
+    "fetch_duration_seconds": 29.329849,
+    "total_pages_discovered": 47,
+    "claude_code_pages": 47,
     "agent_sdk_pages": 0,
-    "pages_fetched_successfully": 47,
+    "pages_fetched_successfully": 48,
     "pages_failed": 0,
     "failed_pages": [],
     "successful_sources": [
@@ -401,12 +407,12 @@
     ],
     "claude_code_sitemap": "https://code.claude.com/docs/sitemap.xml",
     "agent_sdk_sitemap": "https://docs.anthropic.com/sitemap.xml",
-    "files_fetched_this_run": 47,
+    "files_fetched_this_run": 48,
     "files_preserved_from_previous": 17,
-    "total_files": 64,
+    "total_files": 65,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-08T18:08:44.439826",
+  "last_updated": "2025-12-08T21:05:50.231718",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
