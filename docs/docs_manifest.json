@@ -135,8 +135,8 @@
     "memory.md": {
       "original_url": "https://code.claude.com/docs/en/memory",
       "original_md_url": "https://code.claude.com/docs/en/memory.md",
-      "hash": "bdef6dbaa9e8f3478fef6c175016eb7487afdb6935f7976cd51a20709524093a",
-      "last_updated": "2025-12-05T00:24:25.656750"
+      "hash": "7824df90065bd8ec0ee17b916232eefa3849d9be383beaa3aa3cf00c0cf5bd6d",
+      "last_updated": "2025-12-09T18:07:17.337547"
     },
     "microsoft-foundry.md": {
       "original_url": "https://code.claude.com/docs/en/microsoft-foundry",
@@ -393,8 +393,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-09T15:06:53.343197",
-    "fetch_duration_seconds": 29.222605,
+    "last_fetch_completed": "2025-12-09T18:07:32.738878",
+    "fetch_duration_seconds": 29.8136,
     "total_pages_discovered": 47,
     "claude_code_pages": 47,
     "agent_sdk_pages": 0,
@@ -412,7 +412,7 @@
     "total_files": 65,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-09T15:06:53.343230",
+  "last_updated": "2025-12-09T18:07:32.738910",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
