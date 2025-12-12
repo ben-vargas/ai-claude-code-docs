@@ -3,8 +3,8 @@
     "amazon-bedrock.md": {
       "original_url": "https://code.claude.com/docs/en/amazon-bedrock",
       "original_md_url": "https://code.claude.com/docs/en/amazon-bedrock.md",
-      "hash": "9296b17c147185aecc9ab962677437ec6a171a8789105fb84814bfa03f65fa32",
-      "last_updated": "2025-12-08T06:09:30.256572"
+      "hash": "a7bf981296d86a140210aa4cf10b983521b6b61b504bf7cb97f693c2d2bdad3d",
+      "last_updated": "2025-12-12T00:24:14.505386"
     },
     "analytics.md": {
       "original_url": "https://code.claude.com/docs/en/analytics",
@@ -393,8 +393,8 @@
     }
   },
   "fetch_metadata": {
-    "last_fetch_completed": "2025-12-11T21:06:49.372764",
-    "fetch_duration_seconds": 27.296147,
+    "last_fetch_completed": "2025-12-12T00:24:48.002391",
+    "fetch_duration_seconds": 34.383763,
     "total_pages_discovered": 47,
     "claude_code_pages": 47,
     "agent_sdk_pages": 0,
@@ -412,7 +412,7 @@
     "total_files": 65,
     "fetch_tool_version": "4.1"
   },
-  "last_updated": "2025-12-11T21:06:49.372790",
+  "last_updated": "2025-12-12T00:24:48.002490",
   "base_url": "https://raw.githubusercontent.com/ben-vargas/ai-claude-code-docs/main/docs/",
   "github_repository": "ben-vargas/ai-claude-code-docs",
   "github_ref": "main",
